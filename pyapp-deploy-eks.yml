@@ -2,8 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pyapp-deployment
+  labels:
+    app: pyapp
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: pyapp
@@ -13,22 +15,23 @@ spec:
         app: pyapp
     spec:
       containers:
-      - name: pyapp
-        image: 211223789150.dkr.ecr.us-east-1.amazonaws.com/my-docker-repo
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 5000
-#Service for Pyapp - Type:Loadbalancer       
+        - name: pyapp
+          image: hitikab/pyapp:latest
+          ports:
+            - containerPort: 8080
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: python-app-svc
+  name: pyapp-nodeport-service
+  labels:
+    app: pyapp
 spec:
+  type: NodePort
   selector:
-    app: python-app
+    app: pyapp
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 5000
-  type: LoadBalancer
+    - port: 8080
+      targetPort: 8080
+
