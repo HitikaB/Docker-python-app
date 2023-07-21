@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        registry = "public.ecr.aws/v9m7i5p8/pyapp"
+        registry = "318988877498.dkr.ecr.us-east-2.amazonaws.com/pyapp"
     }
     stages {
         stage('checkout') {
@@ -24,8 +24,10 @@ pipeline {
             steps {
                 script {
                     sh "sudo su"
-                    sh "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v9m7i5p8"
-                    sh "docker push public.ecr.aws/v9m7i5p8/pyapp:latest"
+                    sh "aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 318988877498.dkr.ecr.us-east-2.amazonaws.com"
+                    sh "docker push your-docker-hub-username/your-image-name:$BUILD_NUMBER"
+                    sh "docker push 318988877498.dkr.ecr.us-east-2.amazonaws.com/pyapp:latest"
+                    
                 }
             }
         }
@@ -34,10 +36,7 @@ pipeline {
             steps {
                 withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'K8S', namespace: '', serverUrl: '') {
                       sh "sudo su - jenkins"
-                      sh "sudo su"
-                      sh "kubectl create -f ingress-class.yaml"  
-                      sh "kubectl create -f pyapp-deploy-eks.yml" 
-                      sh "kubectl create -f ingress-pyapp.yaml"
+                      sh "kubectl apply -f /pyapp-manifests
 
                 }
             }
