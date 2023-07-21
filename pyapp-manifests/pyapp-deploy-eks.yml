@@ -14,11 +14,21 @@ spec:
       labels:
         app: pyapp
     spec:
+      nodeSelector:
+        region: us-east-2
       containers:
         - name: pyapp
           image: 318988877498.dkr.ecr.us-east-2.amazonaws.com/pyapp
           ports:
             - containerPort: 8080
+          resources:
+            requests:
+               memory: "128Mi" # 128 MebiByte is equal to 135 Megabyte (MB)
+               cpu: "500m" # `m` means milliCPU
+            limits:
+               memory: "500Mi"
+               cpu: "1000m" # 1000m is equal to 1 VCPU core
+
 
 ---
 apiVersion: v1
