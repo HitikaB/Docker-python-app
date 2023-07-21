@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: pyapp
-          image: public.ecr.aws/v9m7i5p8/pyapp:latest
+          image: 318988877498.dkr.ecr.us-east-2.amazonaws.com/pyapp
           ports:
             - containerPort: 8080
 
