@@ -15,7 +15,8 @@ pipeline {
         {
             steps {
                 script {
-                    sh "docker build -t $registry:$BUILD_NUMBER"
+                    dockerImage = docker.build registry
+                    sh "docker tag my-app:latest $registry:build-$BUILD_NUMBER"
                     }
                 }
         }
