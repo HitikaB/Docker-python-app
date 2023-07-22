@@ -34,7 +34,7 @@ pipeline {
         stage ("Deploy to K8S") {
             steps {
                 withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'K8S', namespace: '', serverUrl: '') {
-                    sh "ssh -tt ec2-user@192.168.84.238 -i kube-demo.pem"
+                    sh " sudo ssh -tt ec2-user@192.168.84.238 -i kube-demo.pem"
                     sh "kubectl apply -f pyapp-manifests/"
 
                 }
