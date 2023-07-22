@@ -35,7 +35,7 @@ pipeline {
             steps {
                 withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'K8S', namespace: '', serverUrl: '') {
                       sh "sudo su - jenkins"
-                      sh "kubectl apply -f HitikaB/Docker-app-python/pyapp-manifests"
+                      sh "kubectl apply -f /pyapp-manifests"
 
                 }
             }
