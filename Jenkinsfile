@@ -30,16 +30,16 @@ pipeline {
                 }
             }
         }
-        
-        stage ("Deploy to K8S") {
-            steps {
-                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'K8S', namespace: '', serverUrl: '') {
-                    sh " sudo ssh ec2-user@192.168.84.238 -i kube-demo.pem"
-                    sh "kubectl apply -f pyapp-manifests/"
 
+        stage('SSH to Remote Serverand Deploy') {
+            steps {
+                script {
+                    sshagent(credentials: ['ec2-user']) {
+                        sh "ssh ec2-user@192.168.84.238 'kubectl apply -f pyapp-manifests/'"
+                    }
                 }
             }
-         
         }
+        
     } 
 }
