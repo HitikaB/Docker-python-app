@@ -26,7 +26,7 @@ pipeline {
                 script {
                     sh "sudo su"
                     sh "aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 318988877498.dkr.ecr.us-east-2.amazonaws.com"
-                    sh "docker push 318988877498.dkr.ecr.us-east-2.amazonaws.com/pyapp:$BUILD_NUMBER"
+                    sh "docker push $registry/pyapp:build-$BUILD_NUMBER"
                 }
             }
         }
