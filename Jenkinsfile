@@ -31,13 +31,19 @@ pipeline {
             }
         }
 
-        stage('SSH to Remote server') {
+       stage('SSH and deployment') {
             steps {
                 script {
-                        sh "sudo ssh -tt root@192.168.84.238 -i kube-demo.pem"
-                    }
+                    sshPublisher(
+                        continueOnError: false,
+                        failOnError: true,
+                        publishers: [sshPublisherDesc(configName: 'ec2private', transfers: [
+                            sshTransfer(execCommand: "kubectl apply -f pyapp-manifests/", execTimeout: 120000)
+                        ])]
+                    )
                 }
             }
+        }
         
     } 
 }
