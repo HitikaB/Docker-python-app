@@ -35,8 +35,7 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['ec2-user']) {
-                        sh "sudo su"
-                        sh "ssh ec2-user@192.168.84.238 'kubectl apply -f pyapp-manifests/'"
+                        sh " sudo ssh ec2-user@192.168.84.238 'kubectl apply -f pyapp-manifests/'"
                     }
                 }
             }
