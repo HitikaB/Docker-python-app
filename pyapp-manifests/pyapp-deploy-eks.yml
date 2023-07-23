@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: pyapp
-          image: 318988877498.dkr.ecr.us-east-2.amazonaws.com/pyapp
+          image: 318988877498.dkr.ecr.us-east-2.amazonaws.com/pyapp:build-$BUILD_NUMBER
           ports:
             - containerPort: 8080
           resources:
