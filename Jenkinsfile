@@ -34,7 +34,7 @@ pipeline {
         stage('SSH to Remote server') {
             steps {
                 script {
-                        sh "sudo ssh -tt ec2-user@192.168.84.238 -i kube-demo.pem"
+                        sh "sudo ssh -tt root@192.168.84.238 -i kube-demo.pem"
                     }
                 }
             }
