@@ -8,6 +8,7 @@ app = Flask(__name__)
 def hello():
     """Return a friendly HTTP greeting."""
     return 'Hello from Hitika :^)'
+    return 'Nice to meet you!!'
 
 @app.errorhandler(500)
 def server_error(e):
