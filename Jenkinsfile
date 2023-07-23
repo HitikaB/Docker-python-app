@@ -36,7 +36,6 @@ pipeline {
                 script {
                     sshagent(credentials: ['ec2-user']) {
                         sh "sudo ssh ec2-user@192.168.84.238"
-"
                     }
                 }
             }
