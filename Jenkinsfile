@@ -31,11 +31,12 @@ pipeline {
             }
         }
 
-        stage('SSH to Remote Serverand Deploy') {
+        stage('SSH to Remote server') {
             steps {
                 script {
                     sshagent(credentials: ['ec2-user']) {
-                        sh " sudo ssh ec2-user@192.168.84.238 'kubectl apply -f pyapp-manifests/'"
+                        sh "sudo ssh ec2-user@192.168.84.238"
+"
                     }
                 }
             }
