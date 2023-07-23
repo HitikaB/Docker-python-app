@@ -34,12 +34,10 @@ pipeline {
         stage('SSH to Remote server') {
             steps {
                 script {
-                    sshagent(credentials: ['ec2-user']) {
-                        sh "sudo ssh ec2-user@192.168.84.238"
+                        sh "sudo ssh -tt ec2-user@192.168.84.238 -i kube-demo.pem"
                     }
                 }
             }
-        }
         
     } 
 }
