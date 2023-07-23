@@ -30,24 +30,14 @@ pipeline {
                 }
             }
         }
-
-        stage('SSH to Remote Server') {
+       stage ("Deploy to K8S") {
             steps {
                 script {
-                    sshPublisher(
-                        continueOnError: false,
-                        failOnError: true,
-                        publishers: [sshPublisherDesc(configName: 'ec2private', transfers: [
-                            sshTransfer(
-                                sourceFiles: 'Docker-python-app/pyapp-manifests/',
-                                execCommand: 'kubectl apply -f pyapp-manifests/',
-                                execTimeout: 120000
-                            )
-                        ])]
-                    )
+                    sh "kubectl apply -f pyapp-manifests/"
+
                 }
             }
-        
-    } 
+         
+        } 
 }
 }
