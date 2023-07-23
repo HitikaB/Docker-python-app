@@ -38,7 +38,7 @@ pipeline {
                         continueOnError: false,
                         failOnError: true,
                         publishers: [sshPublisherDesc(configName: 'ec2private', transfers: [
-                            sshTransfer(execCommand: "echo 'hello'", execTimeout: 120000)
+                            sshTransfer(execCommand: "touch hiii", execTimeout: 120000)
                         ])]
                     )
                 }
