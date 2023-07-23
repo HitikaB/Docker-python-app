@@ -31,19 +31,22 @@ pipeline {
             }
         }
 
-       stage('SSH and deployment') {
+        stage('SSH to Remote Server') {
             steps {
                 script {
                     sshPublisher(
                         continueOnError: false,
                         failOnError: true,
                         publishers: [sshPublisherDesc(configName: 'ec2private', transfers: [
-                            sshTransfer(execCommand: "touch hiii", execTimeout: 120000)
+                            sshTransfer(
+                                sourceFiles: 'Docker-python-app/pyapp-manifests/',
+                                execCommand: 'kubectl apply -f pyapp-manifests/',
+                                execTimeout: 120000
+                            )
                         ])]
                     )
                 }
             }
-        }
         
     } 
 }
