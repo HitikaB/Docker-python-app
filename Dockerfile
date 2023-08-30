@@ -15,7 +15,7 @@ COPY . /usr/src/app
 
 # Application Environment variables
 #ENV APP_ENV development
-ENV PORT 8080
+ENV PORT 80
 
 # Exposing Ports
 EXPOSE $PORT
